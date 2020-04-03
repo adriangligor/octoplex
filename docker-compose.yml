@@ -1,0 +1,53 @@
+version: "3.5"
+
+services:
+  octoplex:
+    image: adriangligor/octoplex:latest-dev
+    build:
+      context: .
+      target: build
+      args:
+        BUILD_TARGET: "" # default profile (dev)
+    volumes:
+      - ./src:/usr/src/octoplex/src
+      - ./tests:/usr/src/octoplex/tests
+      - target-vol:/usr/src/octoplex/target
+    ports:
+      - 8080:8080
+    command: ["octoplex-dev"]
+    depends_on:
+      - wiremock
+
+  wiremock:
+    image: rodolpheche/wiremock:latest-alpine
+    volumes:
+    - ./extra/wiremock:/home/wiremock
+    ports:
+      - 18080:8080
+      - 18443:8443
+    command: ["--https-port", "8443"]
+
+  tests:
+    image: adriangligor/octoplex:latest-test
+    build:
+      context: .
+      target: build
+      args:
+        BUILD_TARGET: "" # default profile (dev)
+    volumes:
+      - ./src:/usr/src/octoplex/src
+      - ./tests:/usr/src/octoplex/tests
+      - target-vol:/usr/src/octoplex/target
+    command: ["octoplex-test"]
+    depends_on:
+      - octoplex
+      - wiremock
+    environment:
+      TARGET_HOST: "octoplex"
+      TARGET_PORT: "8080"
+      WIREMOCK_HOST: "wiremock"
+      WIREMOCK_PORT: "8080"
+      WIREMOCK_PORT_SSL: "8443"
+
+volumes:
+  target-vol:

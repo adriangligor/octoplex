@@ -1,0 +1,12 @@
+.idea
+.git
+.gitignore
+
+/_stuff
+/target
+**/*.rs.bk
+
+Dockerfile
+docker-compose.yml
+LICENSE.txt
+readme.md
