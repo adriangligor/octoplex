@@ -70,16 +70,20 @@ By running `docker-compose run tests`, the test suite is ran against the Octople
 
 ## Roadmap items
 
+- [x] Publish initial version with basic unit and integration tests
+- [x] Create a good Dockerfile
+
 - [ ] Introduce CLI arguments
 - [ ] Introduce logging of key information (config, incoming requests, deadline violations, ...)
+- [ ] Implement simple throughput and deviation benchmark (using an nginx target)
 - [ ] Support logging to a log file
+
 - [ ] Implement more unit and integration tests
 - [ ] Support detaching as daemon
 - [ ] Ensure DNS resolving and connection establishment in the background even after reaching batch timeout
 - [ ] Ensure async DNS resolving, caching, respecting TTL and distributing evenly across multiple resolved IPs
 - [ ] Ensure proper caching of TCP connections to resolved IPs, max request count or TTL per connection, growing and shrinking of connection pool
 - [ ] Ensure detection and cleanup of stale connections
-- [x] Create a good Dockerfile
 - [ ] Support gRPC (or similar, with zero-copy capabilities) frontend in addition to HTTP frontend (split off frontends into modules or workspace crates)
 - [ ] Collect statistics and make the available to clients
 - [ ] Support TLS both on all frontends and outgoing
