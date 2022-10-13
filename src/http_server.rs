@@ -1,7 +1,8 @@
 use std::net::SocketAddr;
 
 use anyhow::{Context, Error, Result};
-use hyper::{Body, Method, Request, Response, Server, header};
+use hyper::{Body, Method, Request, Response, header};
+use hyper::server::Server;
 use hyper::body::aggregate;
 use hyper::service::{service_fn, make_service_fn};
 use hyper::server::conn::AddrStream;
@@ -66,7 +67,7 @@ async fn route_multiplex(multi: &Multiplexer, req: Request<Body>) -> Result<Resp
     // deserialize json body
     // XXX ensure zero-copy
 
-    use bytes::buf::BufExt;
+    use bytes::Buf;
 
     // XXX is there a more idiomatic way to do this? we map the Err back to Ok!
     let entire_body = match aggregate(req).await {

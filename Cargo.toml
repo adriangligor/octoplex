@@ -6,21 +6,21 @@ edition = "2018"
 
 [workspace]
 members = [
-#    "playground"
+    "playground"
 ]
 
 [dependencies]
-tokio = { version = "^0.2", features = ["full", "time"] }
+tokio = { version = "^1.20", features = ["full", "time"] }
 futures = "^0.3"
-hyper = { version = "^0.13", features = ["runtime", "stream"] }
-hyper-tls = "^0.4"
+hyper = { version = "^0.14", features = ["runtime", "server", "stream"] }
+hyper-tls = "^0.5"
 native-tls = "^0.2"
 http = "^0.2"
 url = "^2.1"
-bytes = "^0.5"
+bytes = { version = "^1.2", features = ["std"] }
 
-strum = "^0.18"
-strum_macros = "^0.18"
+strum = "^0.24"
+strum_macros = "^0.24"
 serde = "^1.0"
 serde_derive = "^1.0"
 serde_json = "^1.0"
@@ -34,5 +34,5 @@ pretty_env_logger = "^0.4"
 async-trait = "^0.1"
 
 [dev-dependencies]
-mockall = "^0.7"
-reqwest = { version = "^0.10", features = ["blocking", "json"] }
+mockall = "^0.11"
+reqwest = { version = "^0.11", features = ["blocking", "json"] }

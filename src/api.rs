@@ -1,11 +1,10 @@
 use std::collections::HashMap;
-use std::fmt::{Debug, Result as FmtResult};
+use std::fmt::{Debug, Formatter, Result as FmtResult};
 use std::time::Duration;
 
 use http::{HeaderMap, HeaderValue};
 use serde::{Serialize, Serializer};
 use serde::ser::SerializeMap;
-use serde::export::Formatter;
 use strum_macros::AsRefStr;
 
 // XXX using String probably causes a copy, use Cow or &str

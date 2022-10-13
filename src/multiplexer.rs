@@ -1,5 +1,6 @@
 use anyhow::Error as AnyError;
-use tokio::time::{timeout_at, Duration, Elapsed, Instant};
+use tokio::time::{timeout_at, Duration, Instant};
+use tokio::time::error::Elapsed;
 use futures::future::join_all;
 use humantime::format_duration;
 use anyhow::Result;

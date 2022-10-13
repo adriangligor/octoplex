@@ -50,7 +50,7 @@ pub(crate) mod tests {
     use hyper::{Request, Response, Body};
     use mockall::*;
     use mockall::predicate::*;
-    use tokio::time::{delay_for, Duration};
+    use tokio::time::{sleep, Duration};
 
     use crate::http_client::{HttpClient};
 
@@ -61,7 +61,7 @@ pub(crate) mod tests {
             fn request(&self, req: Request<Body>) -> Result<Response<Body>> {}
         }
 
-        trait Clone {
+        impl Clone for HttpClient {
             fn clone(&self) -> Self;
         }
     }
@@ -69,7 +69,7 @@ pub(crate) mod tests {
     #[async_trait]
     impl HttpClient for MockHttpClient {
         async fn request(&self, req: Request<Body>) -> Result<Response<Body>> {
-            delay_for(MOCK_REQUEST_DURATION).await;
+            sleep(MOCK_REQUEST_DURATION).await;
 
             self.request(req)
         }
