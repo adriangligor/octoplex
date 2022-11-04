@@ -58,7 +58,7 @@ pub(crate) mod tests {
 
     mock! {
         pub HttpClient {
-            fn request(&self, req: Request<Body>) -> Result<Response<Body>> {}
+            pub fn request(&self, req: Request<Body>) -> Result<Response<Body>> {}
         }
 
         impl Clone for HttpClient {

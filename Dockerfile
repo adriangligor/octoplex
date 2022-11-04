@@ -1,4 +1,4 @@
-FROM rust:1.43 as build
+FROM rust:1.62 as build
 ARG BUILD_TARGET="--release"
 
 # check base image dependencies
@@ -41,7 +41,7 @@ ENTRYPOINT ["/opt/entrypoint.sh"]
 CMD ["octoplex-dev"]
 
 ################################################################################
-FROM rust:1.43 as binary
+FROM rust:1.62 as binary
 
 COPY --from=build /opt /opt
 

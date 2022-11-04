@@ -13,19 +13,19 @@ services:
       - ./tests:/usr/src/octoplex/tests
       - target-vol:/usr/src/octoplex/target
     ports:
-      - 8080:8080
+      - "8080:8080"
     command: ["octoplex-dev"]
     depends_on:
       - wiremock
 
   wiremock:
-    image: rodolpheche/wiremock:latest-alpine
+    image: wiremock/wiremock:latest-alpine
     volumes:
     - ./extra/wiremock:/home/wiremock
     ports:
-      - 18080:8080
-      - 18443:8443
-    command: ["--https-port", "8443"]
+      - "18080:8080"
+      - "18443:8443"
+    command: ["--https-port", "8443", "--verbose"]
 
   tests:
     image: adriangligor/octoplex:latest-test
